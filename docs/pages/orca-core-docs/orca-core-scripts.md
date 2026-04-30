@@ -2,6 +2,24 @@
 
 This document provides an overview of the available scripts in the `scripts` folder.
 
+
+## Running scripts with mocked motors
+
+Most scripts that use `scripts/common.py` support `--mock`. In mock mode, the script uses `MockOrcaHand` and injects a lightweight in-process `dynamixel_sdk` shim, so no physical motors or serial port are required.
+
+Use this pattern:
+
+```bash
+python scripts/<script_name>.py --mock
+```
+
+If a script needs a config path and you omit it while using `--mock`, it defaults to the bundled right-hand v2 config:
+`orca_core/models/v2/orcahand_right/config.yaml`.
+
+Scripts that directly instantiate `DynamixelClient` (for example `check_motor.py`, `configure_motor_chain.py`, `test_overload.py`, and `debug_overload.py`) are hardware-targeted and do **not** currently support `--mock` out of the box.
+
+Calibration can also be run in mock mode (`python scripts/calibrate.py --mock`). This is useful for validating the calibration workflow and generated `calibration.yaml`, but the resulting limits/ratios reflect simulated motor behavior only and should not be used as physical-hand calibration data.
+
 ### Calibration Scripts
 
 <details>
