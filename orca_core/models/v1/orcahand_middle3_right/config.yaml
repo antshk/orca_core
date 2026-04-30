@@ -1,0 +1,56 @@
+port: /dev/tty.usbserial-FT9MISJT
+version: 0.2.1
+baudrate: 3000000
+max_current: 400
+type: right
+control_mode: current_based_position
+motor_ids:
+- 13
+- 8
+- 9
+joint_ids:
+- middle_abd
+- middle_mcp
+- middle_pip
+joint_to_motor_map:
+  middle_abd: 13
+  middle_mcp: -8
+  middle_pip: -9
+joint_roms:
+  middle_abd:
+  - -37
+  - 37
+  middle_mcp:
+  - -20
+  - 91
+  middle_pip:
+  - -20
+  - 107
+neutral_position:
+  middle_abd: -2
+  middle_mcp: 0
+  middle_pip: 0
+calibration_current: 350
+calibration_step_size: 0.1
+calibration_step_period: 0.001
+calibration_num_stable: 10
+calibration_threshold: 0.01
+calibration_sequence:
+- step: 1
+  joints:
+    middle_abd: flex
+- step: 2
+  joints:
+    middle_abd: extend
+- step: 3
+  joints:
+    middle_mcp: flex
+- step: 4
+  joints:
+    middle_mcp: extend
+- step: 5
+  joints:
+    middle_pip: flex
+- step: 6
+  joints:
+    middle_pip: extend
